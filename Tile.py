@@ -7,7 +7,12 @@ class Tile:
         self.y = y
         self.grid = grid
         self.possibilities = list(self.grid.initial_possibilities)
-        self.entropy = len(self.possibilities)
+
+    
+    @property
+    def entropy(self):
+        return len(self.possibilities)
+
 
     def __repr__(self):
         return f'({self.x}, {self.y})'

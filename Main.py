@@ -4,8 +4,8 @@ from Grid import Grid
 pygame.init()
 
 #grid information
-GR_X_SIZE, GR_Y_SIZE = 3,3
-CELL_SIZE = 143
+GR_X_SIZE, GR_Y_SIZE = 40, 40
+CELL_SIZE = 24
 SC_WIDTH, SC_HEIGHT = GR_X_SIZE * (CELL_SIZE+1)+1, GR_Y_SIZE * (CELL_SIZE+1)+1
 CONNECTIONS = {0: (0,1), 1: (0,1,2), 2: (1,2,3), 3: (2,3)}
 MAP_GRID = Grid(GR_X_SIZE, GR_Y_SIZE, 4, CONNECTIONS)
@@ -24,7 +24,7 @@ TILE_COLORS = (WATER, SAND, GRASS, FOREST)
 
 
 SCREEN = pygame.display.set_mode((SC_WIDTH, SC_HEIGHT), pygame.RESIZABLE, pygame.FULLSCREEN)
-pygame.display.set_caption("testTEST")
+pygame.display.set_caption("WFC")
 
 
 def draw_BG():
@@ -44,16 +44,18 @@ def draw_tiles():
 
 def main():
     run = True
-    clock = pygame.time.Clock()
+    #clock = pygame.time.Clock()
     while run:
-        clock.tick(5)
+        #clock.tick(120)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
         if len(MAP_GRID.collapsed) < MAP_GRID.x_size * MAP_GRID.y_size:
             MAP_GRID.single_iteration()
-
-        print(f'collapsed: {MAP_GRID.collapsed}')
+            print('done iter')
+        else:
+            print("didn't iter")
+        print(len(MAP_GRID.collapsed))
         draw_BG()
         draw_tiles()
         pygame.display.update()

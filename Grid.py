@@ -63,7 +63,8 @@ class Grid:
 
         if len(self.queue) > 0:
             cur = self.queue[0]
-            cur.upd_neighbors()
+            self.upd_neighbors(cur.x, cur.y)
+            self.blacklist.append(cur)
 
     def single_iteration(self):
         determined = [i for i in self.tiles_with_entropy(1) if i not in self.collapsed]
@@ -89,3 +90,7 @@ class Grid:
                 options_list.append(self.map[i][j].possibilities)
         
         return options_list
+
+    @property
+    def entropy(self):
+        return [[tile.entropy for tile in row] for row in self.map]
